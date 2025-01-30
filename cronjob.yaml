@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: network-checker-cronjob
+spec:
+  schedule: "*/5 * * * *"  # اجرای اسکریپت هر 5 دقیقه یکبار
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: network-checker
+              image: <your-dockerhub-username>/network-checker:latest
+              imagePullPolicy: Always
+          restartPolicy: OnFailure
